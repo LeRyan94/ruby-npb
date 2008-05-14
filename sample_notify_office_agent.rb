@@ -1,11 +1,11 @@
 require 'win32ole'
 require 'npb'
 
-HTTP_PROXY="http://proxy.kuins.net:8080"
+
 KYLE = "C:\\Program Files\\Microsoft Office\\OFFICE11\\DOLPHIN.ACS"
 
 
-games = NPB.new.games(HTTP_PROXY)
+games = NPB.new.games
 
 agent = WIN32OLE.new("Agent.Control")
 agent.connected = true
