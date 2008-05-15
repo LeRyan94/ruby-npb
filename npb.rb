@@ -2,18 +2,34 @@ require 'rubygems'
 require 'hpricot'
 require 'open-uri'
 
+#
+#= ruby-npb
+#
+#Author:: Yu Tsuda
+#Mail:: yu.tsuda@gmail.com
+#Description:: This is a ruby library for getting some information about NPB.
+#
+#== History of Development
+#See also: http://github.com/yutsuda/ruby-npb/tree/master
+#
+
 class NPB
   
-  NPB_URL = "http://bis.npb.or.jp/" + Time.now.year.to_s + "/games/"
-  
-  # ŽŽ‡Œ‹‰Ê‚ðŽæ“¾
+  NPB_URL = "http://bis.npb.or.jp/"
+  GAMES_DIR = "/games/"
+  STATS_DIR = "/stats/"
+  THIS_YEAR = Time.now.year.to_s
+
+  #
+  # Get Scores of the Games
+  #
   def games(proxy=nil)
-    doc = get(proxy)
+    doc = get(NPB_URL+THIS_YEAR+GAMES_DIR, proxy)
     
-    # ƒ`[ƒ€–¼‚ðŽæ“¾
+    # get teams name
     teams = get_elements(doc, "td.contentsTeam")
     
-    # “¾“_‚ðŽæ“¾
+    # get scores
     runs = get_elements(doc, "td.contentsRuns")
     
     matches = []
@@ -26,8 +42,8 @@ class NPB
   end
   
   private
-  def get(proxy=nil)
-    return Hpricot( open(NPB_URL, :proxy => proxy ).read )    
+  def get(url, proxy=nil)
+    return Hpricot( open(url, :proxy => proxy ).read )    
   end
   
   def get_elements(doc, element)

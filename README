@@ -1,7 +1,11 @@
-this is readme file.
+Author
+	Yu Tsuda < yu.tsuda@gmail.com >
 
-I write this someday...
+Description
+	This is a ruby library for getting some information about NPB(Nippon Professional Baseball).
 
---
-Yu Tsuda
-yu.tsuda@gmail.com
+See also 
+	http://github.com/yutsuda/ruby-npb/tree/master
+
+Usage
+	I will write this part someday.
