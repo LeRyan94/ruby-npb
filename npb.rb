@@ -12,7 +12,6 @@ require 'open-uri'
 #== History of Development
 #See also: http://github.com/yutsuda/ruby-npb/tree/master
 #
-
 class NPB
   
   NPB_URL = "http://bis.npb.or.jp/"
@@ -41,6 +40,32 @@ class NPB
     
   end
   
+  #
+  # Get team stats 
+  # 
+  def team_stats(proxy=nil)
+    doc = get(NPB_URL+THIS_YEAR+STATS_DIR, proxy)
+
+    # get teams name
+    teams = get_elements(doc, "td.contentsTeam")
+    
+  end
+
+  #
+  # Get player stats
+  #
+  def player_stats(proxy=nil)
+    doc = get(NPB_URL+THIS_YEAR+STATS_DIR, proxy)
+    players = get_elements(doc, "td.regularPlayer")
+    teams = get_elements(doc, "td.regularTeam")
+    stats = get_elements(doc, "td.regularStats")
+    rank_array = players.zip(teams, stats)
+    rank = {}
+    rank["central"] = rank_array.slice!(0,5)
+    rank["pacific"] = rank_array.slice!(0,5)
+    return rank
+  end
+
   private
   def get(url, proxy=nil)
     return Hpricot( open(url, :proxy => proxy ).read )    

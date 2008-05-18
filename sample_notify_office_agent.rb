@@ -4,7 +4,6 @@ require 'npb'
 
 KYLE = "C:\\Program Files\\Microsoft Office\\OFFICE11\\DOLPHIN.ACS"
 
-
 games = NPB.new.games
 
 agent = WIN32OLE.new("Agent.Control")
